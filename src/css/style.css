@@ -1,0 +1,184 @@
+@font-face {
+  font-family: "Neutra Text Bold";
+  src: url("../font/Neutra\ Text\ Bold.otf");
+}
+
+/* body{
+  background: linear-gradient(25deg, #091521, #7a8699);
+} */
+
+.container{
+  margin: 10px;
+  position: relative;
+}
+.rect {
+  position: absolute;
+  height: 6em;
+  width: 1em;
+  text-align: center;
+}
+
+.box {
+  position: absolute;
+  height: 4em;
+  width: 4em;
+  text-align: center;
+}
+
+.bg-blue{
+  background: #1ebaf7;
+}
+
+.bg-yellow{
+  background: #f7df1e;
+}
+
+.box-logo {
+  position: absolute;
+  height: 14em;
+  width: 14em;
+  text-align: center;
+}
+
+.icon{
+  display:inline-block;
+  font-size: 45px;
+  vertical-align: middle;
+  transform: translateY(20%);
+}
+
+.co-black{
+  color:black;
+}
+
+.co-white{
+  color:white;
+}
+
+.presentation-text{
+  font-size: 50px;
+  font-family: 'Neutra Text Bold';
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.35em;
+  margin-left: 0.5em;
+
+}
+
+.text{
+  font-size: 35px;
+  font-family: 'Neutra Text Bold';
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.75em;
+  margin-left: 0.5em;
+}
+
+.text-lower{
+  font-size: 25px;
+  font-family: 'Neutra Text Bold';
+  text-align: left;
+  vertical-align: middle;
+  line-height: 1.75em;
+  margin-left: 0.5em;
+}
+
+.logo-white {
+  background: rgba(245, 245, 245, 0.500);
+  position: relative;
+  height: 14em;
+  width: 50em;
+  top: 0em;
+  left: 14em;
+}
+
+.box-white {
+  background: rgba(245, 245, 245, 0.500);
+  position: relative;
+  height: 4em;
+  width: 15em;
+  top: 0em;
+  left: 4em;
+}
+
+.box-upper {
+  background: #1ebaf7d7;
+  position: relative;
+  height: 4em;
+  width: 30em;
+  top: 0em;
+  left: 1em;
+}
+
+.box-lower {
+  background: rgba(245, 245, 245, 0.500);
+  position: relative;
+  height: 2em;
+  width: 30em;
+  top: 0em;
+  left: 1em;
+}
+
+.roll-in-blurred-bottom {
+  animation: roll-in-blurred-bottom 10s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+.scale-up-tl {
+  animation: scale-up-tl 10s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes roll-in-blurred-bottom {
+  0% {
+    transform: translateY(800px) rotate(720deg);
+    filter: blur(50px);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0) rotate(0deg);
+    filter: blur(0px);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0) rotate(0deg);
+    filter: blur(0px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(800px) rotate(720deg);
+    filter: blur(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(800px) rotate(720deg);
+    filter: blur(50px);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-up-tl {
+  0% {
+    transform: scale(0);
+    transform-origin: 0% 0%;
+  }
+  10% {
+    transform: scale(0);
+    transform-origin: 0% 0%;
+  }
+  15% {
+    transform: scale(1);
+    transform-origin: 0% 0%;
+  }
+  55% {
+    transform: scale(1);
+    transform-origin: 0% 0%;
+  }
+  60% {
+    transform: scale(0);
+    transform-origin: 0% 0%;
+  }
+  100% {
+    transform: scale(0);
+    transform-origin: 0% 0%;
+  }
+}
+
