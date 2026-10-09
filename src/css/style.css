@@ -3,7 +3,7 @@
   --secondary-color: #f7df1e;
   --text-dark: #111111;
   --text-light: #ffffff;
-  --bg-light: rgba(245, 245, 245, 0.95);
+  --bg-light: #2563EB;
   --bg-dark: rgba(20, 20, 20, 0.9);
   
   /* Dimensions */
@@ -66,7 +66,7 @@ body {
 }
 .box-white .text {
   font-size: 1.8em;
-  color: var(--text-dark);
+  color: var(--text-light);
   margin: 0;
   letter-spacing: 1px;
 }
@@ -118,7 +118,7 @@ body {
 }
 .box-lower .text-lower {
   font-size: 1.2em;
-  color: var(--text-dark) !important;
+  color: var(--text-light) !important;
   margin: 0;
   letter-spacing: 1px;
 }
@@ -160,6 +160,10 @@ body {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border-radius: 0;
 }
+.theme-3 .box-white .text {
+  color: var(--text-dark) !important;
+}
+
 .theme-3 .box-white {
   background: #fff;
   border-radius: 0;
