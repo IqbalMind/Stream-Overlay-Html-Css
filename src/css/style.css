@@ -1,11 +1,10 @@
 :root {
   --primary-color: #153C8F;
   --secondary-color: #f7df1e;
-  --text-dark: #000000;
+  --text-dark: #111111;
   --text-light: #ffffff;
-  --bg-light: rgba(245, 245, 245, 0.85);
-  --bg-primary-transparent: rgba(30, 186, 247, 0.85);
-  --font-main: 'Neutra Text Bold', sans-serif;
+  --bg-light: rgba(245, 245, 245, 0.95);
+  --bg-dark: rgba(20, 20, 20, 0.9);
   
   /* Dimensions */
   --icon-box-size: 4em;
@@ -21,8 +20,8 @@
 body {
   margin: 0;
   padding: 20px;
-  overflow: hidden; /* Avoid scrollbars in OBS */
-  font-family: var(--font-main);
+  overflow: hidden;
+  font-family: 'Neutra Text Bold', sans-serif;
 }
 
 .overlay-wrapper {
@@ -37,7 +36,7 @@ body {
   position: relative;
 }
 
-/* --- Social Media Boxes --- */
+/* --- Social Media Boxes (Base) --- */
 .box {
   display: flex;
   justify-content: center;
@@ -49,25 +48,22 @@ body {
   box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
   border-radius: 4px;
 }
-
 .box .icon {
   font-size: 2.2em;
   color: var(--text-light);
 }
-
 .box-white {
   display: flex;
   align-items: center;
   background: var(--bg-light);
   height: 3.2em;
   min-width: 15em;
-  padding: 0 20px 0 30px; /* Extra left padding to go behind the icon box slightly */
-  margin-left: -15px; /* Overlap with the icon box */
+  padding: 0 20px 0 30px;
+  margin-left: -15px;
   z-index: 1;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   border-radius: 0 4px 4px 0;
 }
-
 .box-white .text {
   font-size: 1.8em;
   color: var(--text-dark);
@@ -75,15 +71,13 @@ body {
   letter-spacing: 1px;
 }
 
-/* --- Lower Third --- */
+/* --- Lower Third (Base) --- */
 .lower-third-wrapper {
   margin-top: 50px;
 }
-
 .lower-third-container {
   align-items: stretch;
 }
-
 .rect {
   width: var(--rect-width);
   background: var(--primary-color);
@@ -91,31 +85,27 @@ body {
   box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
   border-radius: 4px;
 }
-
 .lower-third-content {
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
-
 .box-upper {
   display: flex;
   align-items: center;
-  background: var(--bg-primary-transparent);
+  background: var(--primary-color); /* Fixed contrast: opaque primary */
   height: 4em;
   padding: 0 30px;
   min-width: 20em;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   border-radius: 0 4px 0 0;
 }
-
 .box-upper .text {
   font-size: 2em;
-  color: var(--text-light);
+  color: var(--text-light) !important;
   margin: 0;
   letter-spacing: 1px;
 }
-
 .box-lower {
   display: flex;
   align-items: center;
@@ -126,19 +116,67 @@ body {
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   border-radius: 0 0 4px 0;
 }
-
 .box-lower .text-lower {
   font-size: 1.2em;
-  color: var(--text-dark);
+  color: var(--text-dark) !important;
   margin: 0;
   letter-spacing: 1px;
 }
 
-/* --- Colors --- */
-.bg-blue { background: var(--primary-color); }
-.bg-yellow { background: var(--secondary-color); }
-.co-black { color: var(--text-dark) !important; }
-.co-white { color: var(--text-light) !important; }
+
+/* =========================================
+   THEME VARIATIONS 
+   ========================================= */
+
+/* Theme 1: Classic (Default above) */
+
+/* Theme 2: Minimalist Dark */
+.theme-2 .box, .theme-2 .rect {
+  border-radius: 50px;
+  background: var(--primary-color);
+}
+.theme-2 .box-white, .theme-2 .box-upper, .theme-2 .box-lower {
+  background: var(--bg-dark);
+}
+.theme-2 .box-white .text, .theme-2 .box-upper .text, .theme-2 .box-lower .text-lower {
+  color: var(--text-light) !important;
+}
+.theme-2 .box-white {
+  border-radius: 0 50px 50px 0;
+  border: 1px solid #333;
+  border-left: none;
+}
+.theme-2 .box-upper {
+  border-radius: 0 20px 0 0;
+}
+.theme-2 .box-lower {
+  border-radius: 0 0 20px 0;
+  border-top: 2px solid var(--primary-color);
+}
+
+
+/* Theme 3: Gradient Pop */
+.theme-3 .box, .theme-3 .rect {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 0;
+}
+.theme-3 .box-white {
+  background: #fff;
+  border-radius: 0;
+  border-bottom: 3px solid var(--primary-color);
+}
+.theme-3 .box-upper {
+  background: #111;
+  border-radius: 0;
+}
+.theme-3 .box-lower {
+  background: var(--primary-color);
+  border-radius: 0;
+}
+.theme-3 .box-lower .text-lower {
+  color: var(--text-light) !important;
+}
+
 
 /* --- Animations --- */
 .roll-in-blurred-bottom {

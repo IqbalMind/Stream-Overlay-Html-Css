@@ -150,6 +150,14 @@
 
         <div class="section-title">Global Settings</div>
         <div class="form-group">
+            <label>Theme Style</label>
+            <select id="themeSelect" onchange="updatePreview()">
+                <option value="1">Theme 1: Classic Default</option>
+                <option value="2">Theme 2: Minimalist Dark</option>
+                <option value="3">Theme 3: Gradient Pop</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label>Primary Color</label>
             <input type="color" id="primaryColor" value="#153C8F" oninput="updatePreview()">
         </div>
@@ -241,6 +249,7 @@
         function generateConfigData() {
             return {
                 primaryColor: document.getElementById('primaryColor').value,
+                variation: document.getElementById('themeSelect').value,
                 animDuration: document.getElementById('animDuration').value,
                 lowerThird: {
                     name: document.getElementById('ltName').value,

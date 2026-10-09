@@ -31,6 +31,10 @@
       if (activeConfig) {
         // Apply Styles dynamically
         const root = document.documentElement;
+        if (activeConfig.variation) {
+            document.body.classList.add("theme-" + activeConfig.variation);
+        }
+
         if (activeConfig.primaryColor) {
             root.style.setProperty('--primary-color', activeConfig.primaryColor);
         }

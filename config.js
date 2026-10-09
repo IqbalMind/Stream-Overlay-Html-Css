@@ -2,6 +2,7 @@
 // Edit the values below to customize your overlays dynamically!
 
 const config = {
+    variation: 1, // 1: Classic, 2: Minimalist Dark, 3: Gradient Pop
     // ----------------------------------------------------
     // LOWER THIRD SETTINGS
     // Used in lowerthird.html
