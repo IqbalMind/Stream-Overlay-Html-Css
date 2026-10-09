@@ -8,33 +8,33 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <div class="overlay-wrapper">
-    <div class="container">
-      <div class="box bg-blue roll-in-blurred-bottom">
-        <i class="fab fa-linkedin-in icon"></i>
-      </div>
-      <div class="box-white scale-up-tl">
-        <div class="text">/in/iqbalmind</div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="box bg-blue roll-in-blurred-bottom">
-        <i class="fab fa-github icon"></i>
-      </div>
-      <div class="box-white scale-up-tl">
-        <div class="text">@iqbalmind</div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="box bg-blue roll-in-blurred-bottom">
-        <i class="fab fa-instagram icon"></i>
-      </div>
-      <div class="box-white scale-up-tl">
-        <div class="text">@iqbalmind</div>
-      </div>
-    </div>
+  <div class="overlay-wrapper" id="social-wrapper">
+    <!-- Items will be injected here dynamically by config.js -->
   </div>
+
+  <!-- Load Configuration -->
+  <script src="config.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof config !== 'undefined' && config.socialMedia) {
+        const wrapper = document.getElementById('social-wrapper');
+        wrapper.innerHTML = ''; // clear loading state if any
+        
+        config.socialMedia.forEach(social => {
+          const container = document.createElement('div');
+          container.className = 'container';
+          container.innerHTML = `
+            <div class="box bg-blue roll-in-blurred-bottom">
+              <i class="${social.iconClass} icon"></i>
+            </div>
+            <div class="box-white scale-up-tl">
+              <div class="text">${social.handle}</div>
+            </div>
+          `;
+          wrapper.appendChild(container);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

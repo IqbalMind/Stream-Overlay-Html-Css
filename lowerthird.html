@@ -12,13 +12,24 @@
             <div class="rect bg-blue roll-in-blurred-bottom"></div>
             <div class="lower-third-content">
                 <div class="box-upper scale-up-tl">
-                    <div class="text co-white">Muhamad Iqbal Nurmanditya</div>
+                    <div class="text co-white" id="lt-name">Loading...</div>
                 </div>
                 <div class="box-lower scale-up-tl">
-                    <div class="text-lower co-black">CEO, Unicode Gaming</div>
+                    <div class="text-lower co-black" id="lt-role">Loading...</div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Load Configuration -->
+    <script src="config.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof config !== 'undefined') {
+                document.getElementById('lt-name').innerText = config.lowerThird.name;
+                document.getElementById('lt-role').innerText = config.lowerThird.role;
+            }
+        });
+    </script>
 </body>
 </html>
