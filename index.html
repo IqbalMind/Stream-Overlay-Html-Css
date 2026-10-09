@@ -190,6 +190,17 @@
             <input type="number" id="animDuration" value="10" min="2" max="30" oninput="updatePreview()">
         </div>
 
+        <div class="section-title">Message Screen (BRB / Wait)</div>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="msgTitle" value="Be Right Back" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Subtitle</label>
+            <input type="text" id="msgSubtitle" value="Stream will resume shortly" oninput="updatePreview()">
+        </div>
+
+
         <div class="section-title">Lower Third</div>
         <div class="form-group">
             <label>Name</label>
@@ -211,6 +222,8 @@
             <div>
                 <label style="margin-right:10px;">Previewing:</label>
                 <select id="previewSelect" onchange="updatePreview()">
+                    <option value="message-screen.html">Message Screen (BRB)</option>
+
                     <option value="lowerthird.html">Lower Third</option>
                     <option value="social-media.html">Social Media</option>
                 </select>
@@ -279,6 +292,10 @@
                 textDark: document.getElementById('textDark').value,
                 animDuration: document.getElementById('animDuration').value,
                 animStyle: document.getElementById('animStyleSelect').value,
+                messageScreen: {
+                    title: document.getElementById('msgTitle').value,
+                    subtitle: document.getElementById('msgSubtitle').value
+                },
                 lowerThird: {
                     name: document.getElementById('ltName').value,
                     role: document.getElementById('ltRole').value

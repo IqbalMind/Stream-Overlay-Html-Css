@@ -24,6 +24,10 @@ const config = {
     // You can add or remove items from this list.
     // For icons, use Font Awesome 5 Free classes. 
     // Examples: "fab fa-youtube", "fab fa-twitter", "fab fa-twitch", "fab fa-facebook"
+    messageScreen: {
+        title: "Be Right Back",
+        subtitle: "Stream will resume shortly"
+    },
     socialMedia: [
         {
             iconClass: "fab fa-linkedin-in",

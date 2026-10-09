@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Screen Overlay</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <style>
+        body {
+            background-color: transparent !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* We will reuse the box styles from style.css */
+        .message-title-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            padding: 20px 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .message-title-box .text {
+            font-size: 5em;
+            color: var(--text-light) !important;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .message-subtitle-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-light);
+            padding: 15px 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 0 0 8px 8px;
+            min-width: 80%;
+        }
+
+        .message-subtitle-box .text-lower {
+            font-size: 2em;
+            color: var(--text-dark) !important;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* Theme 2: Minimalist Dark */
+        .theme-2 .message-title-box, .theme-2 .message-subtitle-box {
+            background: var(--bg-dark);
+            border: 2px solid var(--primary-color);
+        }
+        .theme-2 .message-title-box {
+            border-bottom: none;
+            border-radius: 50px 50px 0 0;
+        }
+        .theme-2 .message-subtitle-box {
+            border-top: none;
+            border-radius: 0 0 50px 50px;
+        }
+        .theme-2 .message-title-box .text, .theme-2 .message-subtitle-box .text-lower {
+            color: var(--text-light) !important;
+        }
+
+        /* Theme 3: Gradient Pop */
+        .theme-3 .message-title-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 0;
+        }
+        .theme-3 .message-subtitle-box {
+            background: #fff;
+            border-radius: 0;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        .theme-3 .message-subtitle-box .text-lower {
+            color: var(--text-dark) !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="message-container anim-secondary">
+        <div class="message-title-box">
+            <h1 class="text" id="msgTitle">Be Right Back</h1>
+        </div>
+        <div class="message-subtitle-box">
+            <p class="text-lower" id="msgSubtitle">Stream will resume shortly</p>
+        </div>
+    </div>
+
+    <!-- Configuration Script -->
+    <script src="config.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let activeConfig = window.overlayConfig || {};
+
+            // Check URL parameters for dynamic override from Control Panel
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('data')) {
+                try {
+                    const encodedData = urlParams.get('data');
+                    const decodedData = JSON.parse(atob(encodedData));
+                    activeConfig = { ...activeConfig, ...decodedData };
+                } catch (e) {
+                    console.error("Failed to parse URL config data", e);
+                }
+            }
+
+            // Apply Theme and Colors
+            const root = document.documentElement;
+            if (activeConfig) {
+                if (activeConfig.animStyle) {
+                    document.body.classList.add("anim-style-" + activeConfig.animStyle);
+                } else {
+                    document.body.classList.add("anim-style-1");
+                }
+                if (activeConfig.variation) {
+                    document.body.classList.add("theme-" + activeConfig.variation);
+                }
+
+                if (activeConfig.primaryColor) root.style.setProperty('--primary-color', activeConfig.primaryColor);
+                if (activeConfig.secondaryColor) root.style.setProperty("--secondary-color", activeConfig.secondaryColor);
+                if (activeConfig.textLight) root.style.setProperty("--text-light", activeConfig.textLight);
+                if (activeConfig.textDark) root.style.setProperty("--text-dark", activeConfig.textDark);
+                
+                if (activeConfig.animDuration) {
+                    const durationStr = activeConfig.animDuration + "s";
+                    document.querySelectorAll('.anim-primary, .anim-secondary').forEach(el => {
+                        el.style.animationDuration = durationStr;
+                    });
+                }
+
+                // Apply Text Content
+                if (activeConfig.messageScreen) {
+                    if (activeConfig.messageScreen.title) {
+                        document.getElementById('msgTitle').innerText = activeConfig.messageScreen.title;
+                    }
+                    if (activeConfig.messageScreen.subtitle !== undefined) {
+                        document.getElementById('msgSubtitle').innerText = activeConfig.messageScreen.subtitle;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
