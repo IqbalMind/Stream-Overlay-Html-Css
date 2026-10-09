@@ -26,7 +26,8 @@ const config = {
     // Examples: "fab fa-youtube", "fab fa-twitter", "fab fa-twitch", "fab fa-facebook"
     messageScreen: {
         title: "Be Right Back",
-        subtitle: "Stream will resume shortly"
+        subtitle: "Stream will resume shortly",
+        bgUrl: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=3174&auto=format&fit=crop"
     },
     socialMedia: [
         {

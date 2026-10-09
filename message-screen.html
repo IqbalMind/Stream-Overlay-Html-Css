@@ -6,6 +6,30 @@
     <title>Message Screen Overlay</title>
     <link rel="stylesheet" href="src/css/style.css">
     <style>
+        #bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+
         body {
             background-color: transparent !important;
             display: flex;
@@ -95,6 +119,8 @@
 </head>
 <body>
 
+    <div id="bg-layer"></div>
+
     <div class="message-container anim-secondary">
         <div class="message-title-box">
             <h1 class="text" id="msgTitle">Be Right Back</h1>
@@ -146,13 +172,25 @@
                     });
                 }
 
-                // Apply Text Content
+                // Apply Text Content and Background
                 if (activeConfig.messageScreen) {
                     if (activeConfig.messageScreen.title) {
                         document.getElementById('msgTitle').innerText = activeConfig.messageScreen.title;
                     }
                     if (activeConfig.messageScreen.subtitle !== undefined) {
                         document.getElementById('msgSubtitle').innerText = activeConfig.messageScreen.subtitle;
+                    }
+                    
+                    if (activeConfig.messageScreen.bgUrl) {
+                        const bgUrl = activeConfig.messageScreen.bgUrl;
+                        const bgLayer = document.getElementById('bg-layer');
+                        // Check if it's a video
+                        if (bgUrl.match(/\.(mp4|webm|ogg)$/i)) {
+                            bgLayer.innerHTML = `<video id="bg-video" autoplay loop muted playsinline src="${bgUrl}"></video>`;
+                        } else {
+                            bgLayer.style.backgroundImage = `url('${bgUrl}')`;
+                            bgLayer.innerHTML = '';
+                        }
                     }
                 }
             }
