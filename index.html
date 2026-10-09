@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Overlay Preview</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .links {
+            display: flex;
+            gap: 20px;
+        }
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #1ebaf7;
+            color: #1e1e1e;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        a:hover {
+            background: #f7df1e;
+            transform: scale(1.05);
+        }
+        .note {
+            margin-top: 40px;
+            color: #aaa;
+            font-size: 0.9em;
+            text-align: center;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stream Overlay Panel</h1>
+    <div class="links">
+        <a href="lowerthird.html" target="_blank">View Lower Third</a>
+        <a href="social-media.html" target="_blank">View Social Media</a>
+    </div>
+    <div class="note">
+        <p><strong>To use in OBS:</strong></p>
+        <p>1. Add a new "Browser" source.</p>
+        <p>2. Select "Local file" and point it to either <code>lowerthird.html</code> or <code>social-media.html</code>.</p>
+        <p>3. Set the width and height (e.g., 1920x1080) depending on your canvas.</p>
+    </div>
+</body>
+</html>
