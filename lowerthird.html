@@ -21,13 +21,45 @@
         </div>
     </div>
     
-    <!-- Load Configuration -->
     <script src="config.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            if (typeof config !== 'undefined') {
-                document.getElementById('lt-name').innerText = config.lowerThird.name;
-                document.getElementById('lt-role').innerText = config.lowerThird.role;
+            let activeConfig = (typeof config !== 'undefined') ? config : null;
+
+            // Check for URL parameters overriding config
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('data');
+            
+            if (dataParam) {
+                try {
+                    activeConfig = JSON.parse(decodeURIComponent(escape(atob(dataParam))));
+                } catch (e) {
+                    console.error("Failed to parse config from URL", e);
+                }
+            }
+
+            if (activeConfig) {
+                // Apply Text
+                if (activeConfig.lowerThird) {
+                    document.getElementById('lt-name').innerText = activeConfig.lowerThird.name;
+                    document.getElementById('lt-role').innerText = activeConfig.lowerThird.role;
+                }
+                
+                // Apply Styles dynamically
+                const root = document.documentElement;
+                if (activeConfig.primaryColor) {
+                    root.style.setProperty('--primary-color', activeConfig.primaryColor);
+                    // Generate a transparent version for the upper box
+                    root.style.setProperty('--bg-primary-transparent', activeConfig.primaryColor + 'd9'); 
+                }
+                if (activeConfig.animDuration) {
+                    const duration = activeConfig.animDuration + 's';
+                    // We can override the animation duration on the specific elements
+                    const animatedEls = document.querySelectorAll('.roll-in-blurred-bottom, .scale-up-tl');
+                    animatedEls.forEach(el => {
+                        el.style.animationDuration = duration;
+                    });
+                }
             }
         });
     </script>

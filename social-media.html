@@ -9,30 +9,54 @@
 </head>
 <body>
   <div class="overlay-wrapper" id="social-wrapper">
-    <!-- Items will be injected here dynamically by config.js -->
+    <!-- Items injected dynamically -->
   </div>
 
-  <!-- Load Configuration -->
   <script src="config.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (typeof config !== 'undefined' && config.socialMedia) {
-        const wrapper = document.getElementById('social-wrapper');
-        wrapper.innerHTML = ''; // clear loading state if any
-        
-        config.socialMedia.forEach(social => {
-          const container = document.createElement('div');
-          container.className = 'container';
-          container.innerHTML = `
-            <div class="box bg-blue roll-in-blurred-bottom">
-              <i class="${social.iconClass} icon"></i>
-            </div>
-            <div class="box-white scale-up-tl">
-              <div class="text">${social.handle}</div>
-            </div>
-          `;
-          wrapper.appendChild(container);
-        });
+      let activeConfig = (typeof config !== 'undefined') ? config : null;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const dataParam = urlParams.get('data');
+      
+      if (dataParam) {
+          try {
+              activeConfig = JSON.parse(decodeURIComponent(escape(atob(dataParam))));
+          } catch (e) {
+              console.error("Failed to parse config from URL", e);
+          }
+      }
+
+      if (activeConfig) {
+        // Apply Styles dynamically
+        const root = document.documentElement;
+        if (activeConfig.primaryColor) {
+            root.style.setProperty('--primary-color', activeConfig.primaryColor);
+        }
+
+        // Apply HTML
+        if (activeConfig.socialMedia) {
+          const wrapper = document.getElementById('social-wrapper');
+          wrapper.innerHTML = ''; 
+          
+          activeConfig.socialMedia.forEach(social => {
+            const container = document.createElement('div');
+            container.className = 'container';
+            // Use custom duration if specified
+            const durationStyle = activeConfig.animDuration ? `style="animation-duration: ${activeConfig.animDuration}s;"` : '';
+            
+            container.innerHTML = `
+              <div class="box bg-blue roll-in-blurred-bottom" ${durationStyle}>
+                <i class="${social.iconClass || social.icon} icon"></i>
+              </div>
+              <div class="box-white scale-up-tl" ${durationStyle}>
+                <div class="text">${social.handle}</div>
+              </div>
+            `;
+            wrapper.appendChild(container);
+          });
+        }
       }
     });
   </script>

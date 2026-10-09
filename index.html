@@ -3,61 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stream Overlay Preview</title>
+    <title>Stream Overlay Control Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #121212;
+            --panel-bg: #1e1e1e;
+            --primary: #1ebaf7;
+            --text: #ffffff;
+            --text-muted: #aaaaaa;
+        }
         body {
-            font-family: sans-serif;
-            background: #1e1e1e;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* Sidebar Controls */
+        .sidebar {
+            width: 400px;
+            background: var(--panel-bg);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            margin-bottom: 30px;
-        }
-        .links {
-            display: flex;
             gap: 20px;
+            z-index: 10;
         }
-        a {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #1ebaf7;
-            color: #1e1e1e;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: all 0.2s;
+        .sidebar h2 {
+            margin-top: 0;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
         }
-        a:hover {
-            background: #f7df1e;
-            transform: scale(1.05);
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 15px;
         }
-        .note {
-            margin-top: 40px;
-            color: #aaa;
+        .form-group label {
             font-size: 0.9em;
-            text-align: center;
-            max-width: 600px;
+            color: var(--text-muted);
+        }
+        input, button, select {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: white;
+            font-family: inherit;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        button {
+            background: var(--primary);
+            color: #121212;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .social-item {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ddd;
+        }
+        /* Preview Area */
+        .preview-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--panel-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+        .top-bar select {
+            font-size: 1.1em;
+            padding: 8px;
+        }
+        .obs-link-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .obs-link-box input {
+            width: 300px;
+            background: #111;
+            color: #4CAF50;
+        }
+        .preview-frame-container {
+            flex-grow: 1;
+            background: #000 url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" fill="none"/><rect width="10" height="10" fill="%231a1a1a"/><rect width="10" height="10" x="10" y="10" fill="%231a1a1a"/></svg>');
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #333;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <h1>Stream Overlay Panel</h1>
-    <div class="links">
-        <a href="lowerthird.html" target="_blank">View Lower Third</a>
-        <a href="social-media.html" target="_blank">View Social Media</a>
+
+    <div class="sidebar">
+        <h2>Overlay Editor</h2>
+
+        <div class="section-title">Global Settings</div>
+        <div class="form-group">
+            <label>Primary Color</label>
+            <input type="color" id="primaryColor" value="#1ebaf7" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Animation Duration (seconds)</label>
+            <input type="number" id="animDuration" value="10" min="2" max="30" oninput="updatePreview()">
+        </div>
+
+        <div class="section-title">Lower Third</div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="ltName" value="Muhamad Iqbal Nurmanditya" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Role</label>
+            <input type="text" id="ltRole" value="CEO, Unicode Gaming" oninput="updatePreview()">
+        </div>
+
+        <div class="section-title">Social Media</div>
+        <div id="socialList"></div>
+        <button onclick="addSocialItem()">+ Add Social Media</button>
+
     </div>
-    <div class="note">
-        <p><strong>To use in OBS:</strong></p>
-        <p>1. Add a new "Browser" source.</p>
-        <p>2. Select "Local file" and point it to either <code>lowerthird.html</code> or <code>social-media.html</code>.</p>
-        <p>3. Set the width and height (e.g., 1920x1080) depending on your canvas.</p>
+
+    <div class="preview-area">
+        <div class="top-bar">
+            <div>
+                <label style="margin-right:10px;">Previewing:</label>
+                <select id="previewSelect" onchange="updatePreview()">
+                    <option value="lowerthird.html">Lower Third</option>
+                    <option value="social-media.html">Social Media</option>
+                </select>
+            </div>
+            <div class="obs-link-box">
+                <label>OBS URL:</label>
+                <input type="text" id="obsUrl" readonly>
+                <button onclick="copyObsUrl()"><i class="fas fa-copy"></i> Copy for OBS</button>
+            </div>
+        </div>
+        <div class="preview-frame-container">
+            <iframe id="previewFrame" src="lowerthird.html"></iframe>
+        </div>
     </div>
+
+    <script>
+        let socialItems = [
+            { icon: "fab fa-linkedin-in", handle: "/in/iqbalmind" },
+            { icon: "fab fa-github", handle: "@iqbalmind" },
+            { icon: "fab fa-instagram", handle: "@iqbalmind" }
+        ];
+
+        function renderSocialItems() {
+            const list = document.getElementById('socialList');
+            list.innerHTML = '';
+            socialItems.forEach((item, index) => {
+                list.innerHTML += `
+                    <div class="social-item">
+                        <button class="remove-btn" onclick="removeSocialItem(${index})"><i class="fas fa-times"></i></button>
+                        <div class="form-group">
+                            <label>Icon Class (Font Awesome)</label>
+                            <input type="text" value="${item.icon}" oninput="updateSocial(${index}, 'icon', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Handle</label>
+                            <input type="text" value="${item.handle}" oninput="updateSocial(${index}, 'handle', this.value)">
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addSocialItem() {
+            socialItems.push({ icon: "fab fa-twitter", handle: "@username" });
+            renderSocialItems();
+            updatePreview();
+        }
+
+        function removeSocialItem(index) {
+            socialItems.splice(index, 1);
+            renderSocialItems();
+            updatePreview();
+        }
+
+        function updateSocial(index, key, value) {
+            socialItems[index][key] = value;
+            updatePreview();
+        }
+
+        function generateConfigData() {
+            return {
+                primaryColor: document.getElementById('primaryColor').value,
+                animDuration: document.getElementById('animDuration').value,
+                lowerThird: {
+                    name: document.getElementById('ltName').value,
+                    role: document.getElementById('ltRole').value
+                },
+                socialMedia: socialItems
+            };
+        }
+
+        function updatePreview() {
+            const config = generateConfigData();
+            const base64Config = btoa(unescape(encodeURIComponent(JSON.stringify(config))));
+            
+            const selectedFile = document.getElementById('previewSelect').value;
+            
+            // Build absolute URL for OBS
+            const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+            const targetUrl = `${baseUrl}/${selectedFile}?data=${base64Config}`;
+            
+            document.getElementById('obsUrl').value = targetUrl;
+            document.getElementById('previewFrame').src = targetUrl;
+        }
+
+        function copyObsUrl() {
+            const urlInput = document.getElementById('obsUrl');
+            urlInput.select();
+            document.execCommand("copy");
+            alert("URL Copied! In OBS, add a Browser Source, uncheck 'Local file', and paste this URL.");
+        }
+
+        // Init
+        renderSocialItems();
+        updatePreview();
+    </script>
 </body>
 </html>

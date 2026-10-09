@@ -1,37 +1,27 @@
 # Stream Overlay Html&Css
-Contains Lower Third and Social Media animated overlays. 
-I've created what you need for a stream overlay without After Effects, media, or video files. These overlays are built purely with HTML and CSS for lightweight use in OBS, Streamlabs, or any other broadcasting software that supports browser sources.
+Dynamic, customizable Lower Third and Social Media animated overlays for OBS, Streamlabs, and other broadcasting software.
 
-## Features
-- **Lightweight**: Pure HTML/CSS and minimal JavaScript.
-- **Dynamic Configuration**: Easily change text, names, roles, and social media handles via `config.js` without touching HTML code.
-- **Easy Customization**: Colors and dimensions are controlled via CSS Variables in `src/css/style.css`.
-- **Modern Flexbox Layout**: Elements align perfectly regardless of font length.
+## 🌟 New Feature: Web Control Panel!
+You no longer need to edit code manually! We have introduced a **Real-Time Web Control Panel**.
 
-## 🛠️ Configuration & Setup
-Before adding to OBS, customize your details!
-1. Open the `config.js` file in any text editor (like Notepad, VS Code, or TextEdit).
-2. Edit the `lowerThird` section to change your **name** and **role**.
-3. Edit the `socialMedia` section to update your handles. You can add more networks or remove ones you don't need. 
-   *(Icons use Font Awesome classes, e.g., `"fab fa-twitch"`, `"fab fa-youtube"`)*.
-4. Save `config.js`.
+### How to use the Control Panel:
+1. Double-click the `index.html` file to open it in your browser (or visit the hosted GitHub Pages link if available).
+2. Use the left sidebar to customize everything in real-time:
+   - Primary Theme Color
+   - Animation Duration
+   - Lower Third Name & Role
+   - Add/Remove Social Media Handles & Font Awesome Icons
+3. Watch your changes apply instantly in the live preview.
+4. When you're happy with how it looks, click the **"Copy for OBS"** button below the preview.
+5. Go to OBS, add a new **Browser Source**.
+6. **Important:** *Uncheck* "Local File", and **Paste** the copied URL directly into the URL field!
+7. Set the Width (1920) and Height (1080) and click OK.
 
-> **Pro-Tip**: You can customize the overlay colors by editing the `:root` section at the top of `src/css/style.css`.
+### Manual Configuration
+If you prefer not to use the generated URLs, you can still edit the `config.js` file manually as a fallback! The HTML files will automatically read from `config.js` if no custom URL data is provided.
 
-## 📺 How To Use in OBS
-1. Download this repository and extract it anywhere on your computer.
-2. Open OBS Studio (or Streamlabs).
-3. Under **Sources**, click the `+` button and add a new **Browser** source.
-4. Check **Local File** and click **Browse** to select the `.html` file you want to use (`lowerthird.html` or `social-media.html`).
-5. Set Width = `1920` (or `1280`) and Height = `1080` (or `720`).
-6. *(Optional)* Set FPS to `60` if your stream runs at 60 FPS.
-7. Scroll down and **Check** the box that says: `"Refresh browser when scene becomes active"`. (This makes the entrance animations play every time you switch to the scene).
-8. Click OK.
-
-*Note: You can hide/show the source in OBS to trigger the animation to play again!*
-
-## Demo / Preview
-Double-click `index.html` to open a preview control panel right in your browser!
+## Demo
+Open `index.html` to view the control panel and preview the overlays!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
