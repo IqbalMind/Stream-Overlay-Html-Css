@@ -164,6 +164,17 @@
             <input type="color" id="primaryColor" value="#153C8F" oninput="updatePreview()">
         </div>
         <div class="form-group">
+            <label>Secondary Color</label>
+            <input type="color" id="secondaryColor" value="#2563EB" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Text Color (Light)</label>
+            <input type="color" id="textLight" value="#ffffff" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Text Color (Dark)</label>
+            <input type="color" id="textDark" value="#111111" oninput="updatePreview()">
+        </div>
         <div class="form-group">
             <label>Animation Style</label>
             <select id="animStyleSelect" onchange="updatePreview()">
@@ -260,6 +271,9 @@
             return {
                 primaryColor: document.getElementById('primaryColor').value,
                 variation: document.getElementById('themeSelect').value,
+                secondaryColor: document.getElementById('secondaryColor').value,
+                textLight: document.getElementById('textLight').value,
+                textDark: document.getElementById('textDark').value,
                 animDuration: document.getElementById('animDuration').value,
                 animStyle: document.getElementById('animStyleSelect').value,
                 lowerThird: {

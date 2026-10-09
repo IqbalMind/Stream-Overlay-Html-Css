@@ -3,7 +3,11 @@
 
 const config = {
     variation: 1,
-    animStyle: 1, // 1: Roll, 2: Slide, 3: Pop // 1: Classic, 2: Minimalist Dark, 3: Gradient Pop
+    animStyle: 1,
+    primaryColor: "#153C8F",
+    secondaryColor: "#2563EB",
+    textLight: "#ffffff",
+    textDark: "#111111", // 1: Roll, 2: Slide, 3: Pop // 1: Classic, 2: Minimalist Dark, 3: Gradient Pop
     // ----------------------------------------------------
     // LOWER THIRD SETTINGS
     // Used in lowerthird.html
