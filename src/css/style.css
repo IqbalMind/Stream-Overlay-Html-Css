@@ -203,3 +203,80 @@ body {
   60% { transform: scaleX(0); transform-origin: 0% 50%; opacity: 0; }
   100% { transform: scaleX(0); transform-origin: 0% 50%; opacity: 0; }
 }
+
+/* =========================================
+   ANIMATION STYLES 
+   ========================================= */
+
+/* Default timing and assignment for dynamic classes */
+.anim-primary, .anim-secondary {
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* Style 1: Roll & Scale (Classic) */
+.anim-style-1 .anim-primary {
+  animation-name: roll-in-blurred-bottom;
+  animation-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000);
+}
+.anim-style-1 .anim-secondary {
+  animation-name: scale-up-tl;
+  animation-timing-function: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+}
+
+/* Style 2: Slide & Fade */
+.anim-style-2 .anim-primary {
+  animation-name: slide-in-bottom;
+  animation-timing-function: ease-out;
+}
+.anim-style-2 .anim-secondary {
+  animation-name: fade-in-right;
+  animation-timing-function: ease-out;
+}
+
+/* Style 3: Pop & Swipe */
+.anim-style-3 .anim-primary {
+  animation-name: pop-in;
+  animation-timing-function: ease-in-out;
+}
+.anim-style-3 .anim-secondary {
+  animation-name: swipe-in;
+  animation-timing-function: ease-in-out;
+}
+
+/* Keyframes for Style 2 */
+@keyframes slide-in-bottom {
+  0% { transform: translateY(150px); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(150px); opacity: 0; }
+  100% { transform: translateY(150px); opacity: 0; }
+}
+@keyframes fade-in-right {
+  0% { transform: translateX(-50px); opacity: 0; }
+  10% { transform: translateX(-50px); opacity: 0; }
+  15% { transform: translateX(0); opacity: 1; }
+  55% { transform: translateX(0); opacity: 1; }
+  60% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(-50px); opacity: 0; }
+}
+
+/* Keyframes for Style 3 */
+@keyframes pop-in {
+  0% { transform: scale(0); opacity: 0; }
+  10% { transform: scale(1.1); opacity: 1; }
+  12% { transform: scale(1); opacity: 1; }
+  60% { transform: scale(1); opacity: 1; }
+  62% { transform: scale(1.1); opacity: 1; }
+  70% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(0); opacity: 0; }
+}
+@keyframes swipe-in {
+  0% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateX(-10px); }
+  10% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateX(-10px); }
+  15% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateX(0); }
+  55% { clip-path: inset(0 0 0 0); opacity: 1; transform: translateX(0); }
+  60% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateX(-10px); }
+  100% { clip-path: inset(0 100% 0 0); opacity: 0; transform: translateX(-10px); }
+}

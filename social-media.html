@@ -31,6 +31,12 @@
       if (activeConfig) {
         // Apply Styles dynamically
         const root = document.documentElement;
+        if (activeConfig.animStyle) {
+            document.body.classList.add("anim-style-" + activeConfig.animStyle);
+        } else {
+            document.body.classList.add("anim-style-1");
+        }
+
         if (activeConfig.variation) {
             document.body.classList.add("theme-" + activeConfig.variation);
         }
@@ -51,10 +57,10 @@
             const durationStyle = activeConfig.animDuration ? `style="animation-duration: ${activeConfig.animDuration}s;"` : '';
             
             container.innerHTML = `
-              <div class="box bg-blue roll-in-blurred-bottom" ${durationStyle}>
+              <div class="box bg-blue anim-primary" ${durationStyle}>
                 <i class="${social.iconClass || social.icon} icon"></i>
               </div>
-              <div class="box-white scale-up-tl" ${durationStyle}>
+              <div class="box-white anim-secondary" ${durationStyle}>
                 <div class="text">${social.handle}</div>
               </div>
             `;

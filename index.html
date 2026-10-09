@@ -162,6 +162,14 @@
             <input type="color" id="primaryColor" value="#153C8F" oninput="updatePreview()">
         </div>
         <div class="form-group">
+        <div class="form-group">
+            <label>Animation Style</label>
+            <select id="animStyleSelect" onchange="updatePreview()">
+                <option value="1">Style 1: Roll & Scale</option>
+                <option value="2">Style 2: Slide & Fade</option>
+                <option value="3">Style 3: Pop & Swipe</option>
+            </select>
+        </div>
             <label>Animation Duration (seconds)</label>
             <input type="number" id="animDuration" value="10" min="2" max="30" oninput="updatePreview()">
         </div>
@@ -251,6 +259,7 @@
                 primaryColor: document.getElementById('primaryColor').value,
                 variation: document.getElementById('themeSelect').value,
                 animDuration: document.getElementById('animDuration').value,
+                animStyle: document.getElementById('animStyleSelect').value,
                 lowerThird: {
                     name: document.getElementById('ltName').value,
                     role: document.getElementById('ltRole').value

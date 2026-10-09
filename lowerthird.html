@@ -9,12 +9,12 @@
 <body>
     <div class="overlay-wrapper lower-third-wrapper">
         <div class="container lower-third-container">
-            <div class="rect bg-blue roll-in-blurred-bottom"></div>
+            <div class="rect bg-blue anim-primary"></div>
             <div class="lower-third-content">
-                <div class="box-upper scale-up-tl">
+                <div class="box-upper anim-secondary">
                     <div class="text co-white" id="lt-name">Loading...</div>
                 </div>
-                <div class="box-lower scale-up-tl">
+                <div class="box-lower anim-secondary">
                     <div class="text-lower co-black" id="lt-role">Loading...</div>
                 </div>
             </div>
@@ -47,6 +47,12 @@
                 
                 // Apply Styles dynamically
                 const root = document.documentElement;
+                if (activeConfig.animStyle) {
+                    document.body.classList.add("anim-style-" + activeConfig.animStyle);
+                } else {
+                    document.body.classList.add("anim-style-1");
+                }
+
                 if (activeConfig.variation) {
                     document.body.classList.add("theme-" + activeConfig.variation);
                 }
@@ -59,7 +65,7 @@
                 if (activeConfig.animDuration) {
                     const duration = activeConfig.animDuration + 's';
                     // We can override the animation duration on the specific elements
-                    const animatedEls = document.querySelectorAll('.roll-in-blurred-bottom, .scale-up-tl');
+                    const animatedEls = document.querySelectorAll('.anim-primary, .anim-secondary');
                     animatedEls.forEach(el => {
                         el.style.animationDuration = duration;
                     });
